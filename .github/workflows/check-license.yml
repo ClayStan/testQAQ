@@ -11,14 +11,16 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3
-      - name: Install reuse and zsh
-        run: sudo apt install reuse zsh
+      - name: Install reuse
+        run: sudo apt install reuse
       - name: REUSE Compliance Check
         run: reuse lint
   Check-README:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+      - name: Install zsh
+        run: sudo apt install zsh
       - name: README Check
         run: if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
         shell: zsh {0}
