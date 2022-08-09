@@ -14,14 +14,20 @@ jobs:
       - uses: fsfe/reuse-action@v1.2.0
   Check-README:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       - name: Install zsh
         run: sudo apt install zsh
       - name: README Check
-        run: |
-          echo "README Check"
-          if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
-          if [ ! -f "README.zh_CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
+        run: if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
+        shell: zsh {0}
+  Check-README.zh_CN:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install zsh
+        run: sudo apt install zsh
+      - name: README.zh_CN Check
+        run: if [ ! -f "README.zh_CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
         shell: zsh {0}
