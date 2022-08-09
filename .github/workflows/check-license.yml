@@ -2,19 +2,18 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
-name: License Check
+name: License and README Check
 on: workflow_call
 
 jobs:
-  Check-License:
+  Check-License-README:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+      - name: Install reuse and zsh
+        run: sudo apt install reuse zsh
       - name: REUSE Compliance Check
-        # uses: fsfe/reuse-action@v1.2.0
-        run: |
-          sudo apt install reuse zsh
-          reuse lint
+        run: reuse lint
       - name: README Check
         run: if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
         shell: zsh {0}
