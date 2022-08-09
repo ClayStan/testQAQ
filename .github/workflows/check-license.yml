@@ -13,7 +13,7 @@ jobs:
       - name: REUSE Compliance Check
         # uses: fsfe/reuse-action@v1.2.0
         run: |
-          sudo apt install reuse
+          sudo apt install reuse zsh
           reuse lint
       - name: README Check
         run: |
