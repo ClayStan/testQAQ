@@ -16,7 +16,7 @@ jobs:
           sudo apt install reuse zsh
           reuse lint
       - name: README Check
-        run: |
-         if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
-         if [ ! -f "README.zh_CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
+        run: if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
+        shell: zsh {0}
+        run: if [ ! -f "README.zh_CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
         shell: zsh {0}
