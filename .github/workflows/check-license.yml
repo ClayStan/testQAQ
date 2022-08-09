@@ -6,14 +6,19 @@ name: License and README Check
 on: workflow_call
 
 jobs:
-  Check-License-README:
+  Check-License:
     runs-on: ubuntu-22.04
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       - name: Install reuse and zsh
         run: sudo apt install reuse zsh
       - name: REUSE Compliance Check
         run: reuse lint
+  Check-README:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
       - name: README Check
         run: if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
         shell: zsh {0}
