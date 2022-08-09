@@ -17,4 +17,5 @@ jobs:
           reuse lint
       - name: README Check
         run: |
-          [ -f "README.md" ] && [ -f "README.zh_CN.md" ]
+         if [ ! -f "README.md" ];then echo "missing README.md";return 1;fi
+         if [ ! -f "README.zh_CN.md" ]; then echo "missing README.zh_CN.md";return 1;fi
