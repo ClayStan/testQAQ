@@ -11,12 +11,10 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3
-      - name: Install reuse
-        run: sudo apt install reuse
-      - name: REUSE Compliance Check
-        run: reuse lint
+      - uses: fsfe/reuse-action@v1.2.0
   Check-README:
     runs-on: ubuntu-22.04
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v3
       - name: Install zsh
