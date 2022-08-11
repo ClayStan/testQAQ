@@ -27,7 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: results/results.txt
+          path: output/results.txt
   Check-README:
     runs-on: ubuntu-latest
     steps:
