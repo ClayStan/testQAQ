@@ -14,7 +14,21 @@ jobs:
         continue-on-error: true
       - name: Generate Reports
         if: steps.lcheck.outcome != 'success'
-        run: echo "qaq"
+        run: |
+          mkdir output/
+          reuse lint > output/results.txt
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: results
+          path: output
+      - uses: actions/download-artifact@v3.0.0
+        with: name: results
+      - name: comment PR
+        uses: machine-learning-apps/pr-comment@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: results/results.txt
   Check-README:
     runs-on: ubuntu-latest
     steps:
