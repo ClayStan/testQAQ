@@ -3,11 +3,18 @@ on: workflow_call
 
 jobs:
   Check-License:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - uses: fsfe/reuse-action@v1.2.0
+      - name: Install zsh and reuse
+        run: sudo apt install zsh reuse
+      - name: License Check
+        id: lcheck
+        run: reuse lint
         continue-on-error: true
+      - name: Generate Reports
+        if: steps.lcheck.outcome != 'success'
+        run: echo "qaq"
   Check-README:
     runs-on: ubuntu-latest
     steps:
