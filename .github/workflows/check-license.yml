@@ -22,7 +22,8 @@ jobs:
           name: results
           path: output
       - uses: actions/download-artifact@v3.0.0
-        with: name: results
+        with:
+          name: results
       - name: comment PR
         uses: machine-learning-apps/pr-comment@master
         env:
